@@ -1,0 +1,29 @@
+.background {
+    height: 800px;
+    width: 100%;
+    background-image: url("https://media5.sgp1.digitaloceanspaces.com/wp-content/uploads/2021/09/13134158/ot-chuong-ot-ngot-mau-nao-tot-nhat.jpg");
+    background-attachment: fixed;
+    background-size: 100%;
+    opacity: 0.1;
+}
+
+table {
+    position: absolute;
+    top: 150px;
+    left: 100px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 66%;
+}
+
+td, th {
+    border: 1px solid #000;
+    text-align: left;
+    padding: 8px;
+    height: 40px;
+    width: 50px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
