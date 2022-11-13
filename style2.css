@@ -9,8 +9,8 @@
 
 table {
     position: absolute;
-    top: 150px;
-    left: 100px;
+    top: 40px;
+    left: 5%;
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 66%;
@@ -20,7 +20,7 @@ td, th {
     border: 1px solid #000;
     text-align: left;
     padding: 8px;
-    height: 40px;
+    height: 30px;
     width: 50px;
 }
 
@@ -28,9 +28,16 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-.thongke {
+.trangchu {
     position: absolute;
     top: 40px;
+    right: 4%;
+    width: 20%;
+}
+
+.thongke {
+    position: absolute;
+    top: 80px;
     right: 4%;
     height: 100%;
     width: 20%;
