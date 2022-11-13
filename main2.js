@@ -2,6 +2,10 @@ const $ = document.querySelector.bind(document)
 const $$ = document.querySelectorAll.bind(document)
 
 var tb = $(".tb")
+var chili_r = $(".chili_r")
+var chili_y = $(".chili_y")
+var chili_g = $(".chili_g")
+var price = $$(".price")
 var db = []
 var records = 100
 
@@ -27,7 +31,7 @@ fetch("https://api.thingspeak.com/channels/1909224/feeds.json?results=" + record
             pre_y = y
             pre_g = g
         })
-        db.push([pre_d, pre_r, pre_y, pre_g])
+        db.push(["Vụ mùa hiện tại", pre_r, pre_y, pre_g])
     })
     .then(() => {
         var predict_r = 0
@@ -49,7 +53,7 @@ fetch("https://api.thingspeak.com/channels/1909224/feeds.json?results=" + record
         var predict_sum = predict_r + predict_g + predict_y
         tb.innerHTML += 
             `<tr>
-                <td>Tổng</td>
+                <td class="indam">Tổng</td>
                 <td>${predict_r}</td>
                 <td>${predict_y}</td>
                 <td>${predict_g}</td>
@@ -61,10 +65,41 @@ fetch("https://api.thingspeak.com/channels/1909224/feeds.json?results=" + record
         predict_g /= db.length
         tb.innerHTML += 
             `<tr>
-                <td>Dự đoán mùa tiếp theo</td>
-                <td>${Math.round(predict_r)}</td>
-                <td>${Math.round(predict_y)}</td>
-                <td>${Math.round(predict_g)}</td>
-                <td>${Math.round(predict_sum)}</td>
+                <td class="indam">Dự đoán mùa tiếp theo</td>
+                <td class="indam">${Math.round(predict_r)}</td>
+                <td class="indam">${Math.round(predict_y)}</td>
+                <td class="indam">${Math.round(predict_g)}</td>
+                <td class="indam">${Math.round(predict_sum)}</td>
             </tr>`
+    })
+    .then(()=> {
+        var len = db.length
+        var change_r
+        if (db[len-1][1]-db[len-2][1] >= 0){
+            change_r = "TĂNG "+(db[len-1][1]-db[len-2][1])+" quả ~"+Math.round((db[len-1][1]/db[len-2][1])*100-100)+"%"
+        } else change_r = "GIẢM "+(db[len-2][1]-db[len-1][1])+" quả ~"+Math.round(100-(db[len-1][1]/db[len-2][1])*100)+"%"
+        chili_r.innerHTML += change_r
+        var change_y
+        if (db[len-1][2]-db[len-2][2] >= 0){
+            change_y = "TĂNG "+(db[len-1][2]-db[len-2][2])+" quả ~"+Math.round((db[len-1][2]/db[len-2][2])*100-100)+"%"
+        } else change_y = "GIẢM "+(db[len-2][2]-db[len-1][2])+" quả ~"+Math.round(100-(db[len-1][2]/db[len-2][2])*100)+"%"
+        chili_y.innerHTML += change_y
+        var change_g
+        if (db[len-1][3]-db[len-2][3] >= 0){
+            change_g = "TĂNG "+(db[len-1][3]-db[len-2][3])+" quả ~"+Math.round((db[len-1][3]/db[len-2][3])*100-100)+"%"
+        } else change_g = "GIẢM "+(db[len-2][3]-db[len-1][3])+" quả ~"+Math.round(100-(db[len-1][3]/db[len-2][3])*100)+"%"
+        chili_g.innerHTML += change_g
+    })
+    .then(()=> {
+        var len = db.length
+        var pr = price[0].value
+        var tong=pr*db[len-1][1] + price[1].value*db[len-1][2] + price[2].value*db[len-1][3]
+        price.forEach((p, i)=>{
+            p.addEventListener("change", ()=>{
+                tong = tong-pr*db[len-1][i+1]/4 + p.value*db[len-1][i+1]/4
+                $(".u").innerHTML=tong
+                pr=p.value
+            })
+        })
+        $(".u").innerHTML=(tong/4)
     })

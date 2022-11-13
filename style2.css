@@ -42,3 +42,7 @@ tr:nth-child(even) {
     height: 100%;
     width: 20%;
 }
+
+.indam {
+    font-weight: 700;
+}
