@@ -15,7 +15,7 @@ function get_db(records) {
             num_y = parseInt(res.feeds[records-1].field2)*50
             num_g = parseInt(res.feeds[records-1].field3)*50
             red.innerHTML = num_r
-            green.innerHTML = num_g*50
+            green.innerHTML = num_g
             yellow.innerHTML = num_y
             sum.innerHTML = num_r+num_g+num_y
         })
