@@ -7,7 +7,7 @@ var chili_y = $(".chili_y")
 var chili_g = $(".chili_g")
 var price = $$(".price")
 var db = []
-var records = 100
+var records = 300
 
 
 fetch("https://api.thingspeak.com/channels/1909224/feeds.json?results=" + records)
