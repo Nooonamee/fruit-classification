@@ -12,8 +12,8 @@ function get_db(records) {
         .then(res => res.json())
         .then(res => {
             num_r = parseInt(res.feeds[records-1].field1)
-            num_g = parseInt(res.feeds[records-1].field2)
-            num_y = parseInt(res.feeds[records-1].field3)
+            num_y = parseInt(res.feeds[records-1].field2)
+            num_g = parseInt(res.feeds[records-1].field3)
             red.innerHTML = num_r
             green.innerHTML = num_g
             yellow.innerHTML = num_y

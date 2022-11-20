@@ -21,8 +21,8 @@ fetch("https://api.thingspeak.com/channels/1909224/feeds.json?results=" + record
             var d = new Date(entry.created_at)
             d = d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear()+"\n"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
             r = parseInt(entry.field1)
-            g = parseInt(entry.field2)
-            y = parseInt(entry.field3)
+            y = parseInt(entry.field2)
+            g = parseInt(entry.field3)
             if (r - pre_r < 0 || g - pre_g < 0 || y - pre_y < 0) {
                 if (!isNaN(pre_y)&&pre_r+pre_g+pre_y>0) db.push([pre_d, pre_r, pre_y, pre_g])
             }
